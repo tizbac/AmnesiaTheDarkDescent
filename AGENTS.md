@@ -36,6 +36,7 @@ HPL2/
 | `IS_APPLE_64` | OFF | 64-bit macOS build |
 | `AMNESIA_WITH_SERIAL` | OFF | Enable serial key checking (needs extra source) |
 | `USE_GAMEPAD` | ON | Enable gamepad support |
+| `USE_OPENXR` | ON | Enable OpenXR VR support (requires libopenxr-dev) |
 
 ### Targets
 - `Amnesia` - Main game executable
@@ -90,6 +91,27 @@ Used as fallback when system libraries not available:
 - **Linux**: Uses SDL2, X11, FLTK for launcher — **fully working on modern distros**
 - **macOS**: Uses Cocoa launcher (`launcher-macosx/`), bundles frameworks via `PostBuildMacBundle()`
 - **Windows**: Visual Studio 2010 project files (`.vcproj`, `.sln`) — outdated
+
+## VR Support (OpenXR)
+Experimental OpenXR VR support is available as a compile-time option:
+
+```bash
+# Install OpenXR development headers
+sudo apt install libopenxr-dev
+
+# Build with VR support
+cmake ../amnesia/src -DCMAKE_BUILD_TYPE=Release -DUSE_SDL2=ON -DUSE_OPENXR=ON
+```
+
+**Current status**: Framework is implemented (`HPL2/core/include/graphics/OpenXR.h`, `HPL2/core/sources/graphics/OpenXR.cpp`) with OpenXR 1.0 loader integration. The implementation provides:
+- OpenXR instance/session management
+- View matrix retrieval for stereo rendering
+- Controller input abstraction
+- Config file integration (`VR.Enabled`, `VR.IPD`, `VR.NearZ`, `VR.FarZ`)
+
+**Limitations**: Full stereo rendering pipeline and compositor integration not yet implemented. The current build links against `libopenxr_loader.so` and initializes the OpenXR runtime, but stereo rendering to the HMD is a work in progress.
+
+**Dependencies**: `libopenxr-dev` (OpenXR 1.0 loader + headers)
 
 ## Key Changes (Modernization)
 1. **FBX SDK → Assimp**: Created `MeshLoaderAssimp.h/cpp` using Assimp 5.x API to load FBX, Collada, OBJ, glTF, etc.

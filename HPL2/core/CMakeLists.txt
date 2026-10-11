@@ -73,10 +73,13 @@ ENDIF()
 
 OPTION(USE_SDL2 "Use SDL2 instead of SDL1.2" ON)
 
+OPTION(USE_OPENXR "Enable OpenXR VR support" ON)
+
 add_subdirectory(../dependencies/OALWrapper OALWrapper)
 
 SET(HPL2_DEFINES
     PUBLIC $<$<BOOL:${USE_SDL2}>:USE_SDL2>
+    PUBLIC $<$<BOOL:${USE_OPENXR}>:USE_OPENXR>
 )
 
 add_definitions(
@@ -185,6 +188,8 @@ file(GLOB impl_sources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
     sources/impl/MeshLoaderColladaLoader.cpp
     sources/impl/MeshLoaderMSH.cpp
     sources/impl/MeshLoaderAssimp.cpp
+    # VR
+    $<$<BOOL:${USE_OPENXR}>:sources/impl/OpenXR.cpp>
 )
 
 IF(APPLE)
@@ -298,6 +303,11 @@ FindPrebuiltLibrary(NEWTON_LIBRARY Newton)
 FindPrebuiltLibrary(ANGELSCRIPT_LIBRARY angelscript)
 find_package(assimp REQUIRED)
 
+# OpenXR for VR support
+if(USE_OPENXR)
+    find_package(OpenXR)
+endif()
+
 find_package(OpenGL)
 mark_as_advanced(NEWTON_LIBRARY ANGELSCRIPT_LIBRARY)
 
@@ -344,6 +354,7 @@ target_link_libraries(HPL2
     ${DEVIL_LIBRARY}
     z
     assimp::assimp
+    $<$<BOOL:${USE_OPENXR}>:OpenXR::openxr_loader>
     ${PLATFORM_LIBS}
 )
 

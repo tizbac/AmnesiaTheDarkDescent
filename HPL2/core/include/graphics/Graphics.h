@@ -45,6 +45,11 @@ namespace hpl {
 	class cPostEffectComposite;
 	class iGpuProgram;
 	class cParserVarContainer;
+	class cConfigFile;
+
+#if defined(USE_OPENXR)
+	class cOpenXR;
+#endif
 
 	//------------------------------------------------------
 	
@@ -133,6 +138,20 @@ namespace hpl {
 		cTextureCreator* GetTextureCreator(){ return mpTextureCreator;}
 		cDecalCreator* GetDecalCreator() {return mpDecalCreator;}
 		
+#if defined(USE_OPENXR)
+		// VR Support
+		bool IsVRAvailable() const;
+		bool IsVREnabled() const;
+		bool IsVRRunning() const;
+		void SetVREnabled(bool abEnabled);
+		void GetVRViewMatrices(cMatrixf& avLeftView, cMatrixf& avRightView, cMatrixf& avLeftProj, cMatrixf& avRightProj);
+		cVector2l GetVRRenderTargetSize() const;
+		bool GetVRControllerState(int alHand, cVector3f& avPos, cQuaternion& aqRot, float& afTrigger, float& afGrip, bool& abMenu, bool& abGripPressed);
+		void SetVRIPD(float afIPD);
+		void SetVRNearZ(float afNear);
+		void SetVRFarZ(float afFar);
+#endif
+		
 		bool GetScreenIsSetUp(){ return mbScreenIsSetup;}
 	
 	private:
@@ -155,6 +174,10 @@ namespace hpl {
 		tGpuProgramList mlstGpuPrograms;
 		tMaterialTypeMap m_mapMaterialTypes;
 		tPostEffectList mlstPostEffects;
+
+#if defined(USE_OPENXR)
+		cOpenXR* mpOpenXR;
+#endif
 
 		bool mbScreenIsSetup;
 	};

@@ -55,6 +55,10 @@
 #include "graphics/RendererWireFrame.h"
 #include "graphics/RendererSimple.h"
 
+#if defined(USE_OPENXR)
+#include "graphics/OpenXR.h"
+#endif
+
 namespace hpl {
 
 	//////////////////////////////////////////////////////////////////////////
@@ -521,5 +525,102 @@ namespace hpl {
 	}
 
 	//-----------------------------------------------------------------------
+
+
+#if defined(USE_OPENXR)
+
+//-----------------------------------------------------------------------
+
+bool cGraphics::IsVRAvailable() const
+{
+	if (mpOpenXR)
+		return mpOpenXR->IsAvailable();
+	return false;
+}
+
+//-----------------------------------------------------------------------
+
+bool cGraphics::IsVREnabled() const
+{
+	if (mpOpenXR)
+		return mpOpenXR->IsEnabled();
+	return false;
+}
+
+//-----------------------------------------------------------------------
+
+bool cGraphics::IsVRRunning() const
+{
+	if (mpOpenXR)
+		return mpOpenXR->IsRunning();
+	return false;
+}
+
+//-----------------------------------------------------------------------
+
+void cGraphics::SetVREnabled(bool abEnabled)
+{
+	if (mpOpenXR)
+		mpOpenXR->SetEnabled(abEnabled);
+}
+
+//-----------------------------------------------------------------------
+
+void cGraphics::GetVRViewMatrices(cMatrixf& avLeftView, cMatrixf& avRightView, cMatrixf& avLeftProj, cMatrixf& avRightProj)
+{
+	if (mpOpenXR)
+		mpOpenXR->GetViewMatrices(avLeftView, avRightView, avLeftProj, avRightProj);
+	else
+	{
+		avLeftView = cMatrixf::Identity;
+		avRightView = cMatrixf::Identity;
+		avLeftProj = cMatrixf::Identity;
+		avRightProj = cMatrixf::Identity;
+	}
+}
+
+//-----------------------------------------------------------------------
+
+cVector2l cGraphics::GetVRRenderTargetSize() const
+{
+	if (mpOpenXR)
+		return mpOpenXR->GetRecommendedRenderTargetSize();
+	return cVector2l(0, 0);
+}
+
+//-----------------------------------------------------------------------
+
+bool cGraphics::GetVRControllerState(int alHand, cVector3f& avPos, cQuaternion& aqRot, float& afTrigger, float& afGrip, bool& abMenu, bool& abGripPressed)
+{
+	if (mpOpenXR)
+		return mpOpenXR->GetControllerState(alHand, avPos, aqRot, afTrigger, afGrip, abMenu, abGripPressed);
+	return false;
+}
+
+//-----------------------------------------------------------------------
+
+void cGraphics::SetVRIPD(float afIPD)
+{
+	if (mpOpenXR)
+		mpOpenXR->SetIPD(afIPD);
+}
+
+//-----------------------------------------------------------------------
+
+void cGraphics::SetVRNearZ(float afNear)
+{
+	if (mpOpenXR)
+		mpOpenXR->SetNearZ(afNear);
+}
+
+//-----------------------------------------------------------------------
+
+void cGraphics::SetVRFarZ(float afFar)
+{
+	if (mpOpenXR)
+		mpOpenXR->SetFarZ(afFar);
+}
+
+#endif // USE_OPENXR
 
 }
