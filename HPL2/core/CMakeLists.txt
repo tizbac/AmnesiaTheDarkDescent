@@ -1,6 +1,10 @@
 cmake_minimum_required (VERSION 2.8.11)
 project(HPL2)
 
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(BoilerPlate)
 
@@ -8,18 +12,28 @@ set(HPL2_VERSION_MAJOR 2)
 set(HPL2_VERSION_MINOR 0)
 if(IS_APPLE_64)
     set(BIN_LIBROOT "${PLATFORM_PREFIX}64")
+elseif(LINUX AND CMAKE_SIZEOF_VOID_P MATCHES "8" AND NOT FORCE32)
+    set(BIN_LIBROOT "lib64")
 else()
     set(BIN_LIBROOT ${PLATFORM_PREFIX})
 endif()
 
 set(DEP_LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../dependencies/lib/${BIN_LIBROOT}")
 set(DEP_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../dependencies/include")
-find_path(PREBUILT_PLATFORM_ROOT .
-    PATHS "${DEP_LIB_DIR}"
-    NO_DEFAULT_PATH
-)
+
+if(LINUX)
+    # PREBUILT_PLATFORM_ROOT should point to the platform directory (e.g., dependencies/lib/linux)
+    set(PREBUILT_PLATFORM_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../dependencies/lib/linux" CACHE PATH "Prebuilt platform root")
+else()
+    find_path(PREBUILT_PLATFORM_ROOT .
+        PATHS "${DEP_LIB_DIR}"
+        NO_DEFAULT_PATH
+    )
+endif()
+
 set(DEP_LIB_DIR ${DEP_LIB_DIR} PARENT_SCOPE)
 set(DEP_INCLUDE_DIR ${DEP_INCLUDE_DIR} PARENT_SCOPE)
+set(PREBUILT_PLATFORM_ROOT ${PREBUILT_PLATFORM_ROOT} PARENT_SCOPE)
 mark_as_advanced(
     PREBUILT_PLATFORM_ROOT
 )
@@ -34,8 +48,27 @@ IF(APPLE)
         SET(PRIVATE_LIB_SUFFIX "lib/macosx")
     endif()
 ELSEIF(LINUX)
-    SET(PRIVATE_LIB_SUFFIX "lib/linux")
     SET(PRIVATE_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../dependencies CACHE PATH "")
+    # Detect 64-bit for OALWrapper library search
+    if(CMAKE_SIZEOF_VOID_P MATCHES "8" AND NOT FORCE32)
+        if(EXISTS ${PRIVATE_LIB_DIR}/lib64)
+            SET(PRIVATE_LIB_SUFFIX "lib64")
+        elseif(EXISTS ${PRIVATE_LIB_DIR}/linux64)
+            SET(PRIVATE_LIB_SUFFIX "linux64")
+        else()
+            SET(PRIVATE_LIB_SUFFIX "lib/linux")
+        endif()
+        
+        # Pre-set OALWrapper library paths to 64-bit versions
+        set(VORBISFILE_LIBRARY "${PRIVATE_LIB_DIR}/lib/linux/lib64/libvorbisfile.so" CACHE FILEPATH "VorbisFile library")
+        set(VORBIS_LIBRARY "${PRIVATE_LIB_DIR}/lib/linux/lib64/libvorbis.so" CACHE FILEPATH "Vorbis library")
+        set(OGG_LIBRARY "${PRIVATE_LIB_DIR}/lib/linux/lib64/libogg.so" CACHE FILEPATH "Ogg library")
+        set(VORBISFILE_LIBRARY "${PRIVATE_LIB_DIR}/lib/linux/lib64/libvorbisfile.so" CACHE FILEPATH "VorbisFile library")
+        set(OPENAL_LIBRARY "${PRIVATE_LIB_DIR}/lib/linux/lib64/libopenal.so" CACHE FILEPATH "OpenAL library")
+        set(SDL_LIBRARY "${PRIVATE_LIB_DIR}/lib/linux/lib64/libSDL2.so" CACHE FILEPATH "SDL2 library")
+    else()
+        SET(PRIVATE_LIB_SUFFIX "lib/linux")
+    endif()
 ENDIF()
 
 OPTION(USE_SDL2 "Use SDL2 instead of SDL1.2" ON)
@@ -151,7 +184,7 @@ file(GLOB impl_sources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
     sources/impl/MeshLoaderColladaHelpers.cpp
     sources/impl/MeshLoaderColladaLoader.cpp
     sources/impl/MeshLoaderMSH.cpp
-    sources/impl/MeshLoaderFBX.cpp
+    sources/impl/MeshLoaderAssimp.cpp
 )
 
 IF(APPLE)
@@ -237,15 +270,36 @@ source_group("Platform" REGULAR_EXPRESSION "\\/impl\\/Platform.+")
 
 # setup libs
 
+# For 64-bit Linux, use lib64 directory explicitly
+if(LINUX AND CMAKE_SIZEOF_VOID_P MATCHES "8" AND NOT FORCE32)
+    set(DEP_LIB64_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../dependencies/lib/linux/lib64")
+    # Use explicit paths for 64-bit libraries
+    set(VORBISFILE_LIBRARY "${DEP_LIB64_DIR}/libvorbisfile.so")
+    set(VORBIS_LIBRARY "${DEP_LIB64_DIR}/libvorbis.so")
+    set(OGG_LIBRARY "${DEP_LIB64_DIR}/libogg.so")
+    set(OPENAL_LIBRARY "${DEP_LIB64_DIR}/libopenal.so")
+    set(SDL2_LIBRARY "${DEP_LIB64_DIR}/libSDL2.so")
+    set(THEORA_LIBRARY "${DEP_LIB64_DIR}/libtheora.so")
+    set(DEVIL_LIBRARY "${DEP_LIB64_DIR}/libIL.so")
+    set(GLEW_LIBRARY "${DEP_LIB64_DIR}/libGLEW.a")
+else()
+    # 32-bit or other platforms
+    FindPrebuiltLibrary(VORBISFILE_LIBRARY vorbisfile)
+    FindPrebuiltLibrary(VORBIS_LIBRARY vorbis)
+    FindPrebuiltLibrary(OGG_LIBRARY ogg)
+    FindPrebuiltLibrary(OPENAL_LIBRARY openal)
+    FindPrebuiltLibrary(SDL2_LIBRARY SDL2)
+    FindPrebuiltLibrary(THEORA_LIBRARY theora)
+    FindPrebuiltLibrary(DEVIL_LIBRARY IL)
+    FindPrebuiltLibrary(GLEW_LIBRARY GLEW)
+endif()
+
 FindPrebuiltLibrary(NEWTON_LIBRARY Newton)
 FindPrebuiltLibrary(ANGELSCRIPT_LIBRARY angelscript)
-FindPrebuiltLibrary(FBX_LIBRARY fbxsdk-2012.2-static)
-FindPrebuiltLibrary(GLEW_LIBRARY GLEW)
-FindPrebuiltLibrary(THEORA_LIBRARY theora)
-FindPrebuiltLibrary(DEVIL_LIBRARY IL)
+find_package(assimp REQUIRED)
 
 find_package(OpenGL)
-mark_as_advanced(NEWTON_LIBRARY ANGELSCRIPT_LIBRARY FBX_LIBRARY GLEW_LIBRARY THEORA_LIBRARY DEVIL_LIBRARY)
+mark_as_advanced(NEWTON_LIBRARY ANGELSCRIPT_LIBRARY)
 
 # setup HPL2 compile target
 
@@ -289,7 +343,7 @@ target_link_libraries(HPL2
     ${THEORA_LIBRARY}
     ${DEVIL_LIBRARY}
     z
-    ${FBX_LIBRARY}
+    assimp::assimp
     ${PLATFORM_LIBS}
 )
 
@@ -344,7 +398,7 @@ FUNCTION(AddTestTarget target_name)
     )
 ENDFUNCTION()
 
-add_subdirectory(../tests tests)
+# add_subdirectory(../tests tests)  # No CMakeLists.txt in tests
 add_subdirectory(../tools tools)
 
 

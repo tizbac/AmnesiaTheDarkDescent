@@ -9,11 +9,18 @@ function(FindPrebuiltLibrary result_var libname)
         message(FATAL_ERROR "Must set PREBUILT_PLATFORM_ROOT before using this function")
     endif()
 
-    # check prebuilt directory first
-    find_library(${result_var}
-        NAMES ${libname}
-        PATHS ${PREBUILT_PLATFORM_ROOT}/lib ${PREBUILT_PLATFORM_ROOT}
-        NO_DEFAULT_PATH)
+    # check prebuilt directory first - use lib64 for 64-bit builds
+    if(CMAKE_SIZEOF_VOID_P MATCHES "8" AND NOT FORCE32)
+        find_library(${result_var}
+            NAMES ${libname}
+            PATHS ${PREBUILT_PLATFORM_ROOT}/lib64 ${PREBUILT_PLATFORM_ROOT}
+            NO_DEFAULT_PATH)
+    else()
+        find_library(${result_var}
+            NAMES ${libname}
+            PATHS ${PREBUILT_PLATFORM_ROOT}/lib ${PREBUILT_PLATFORM_ROOT}
+            NO_DEFAULT_PATH)
+    endif()
     # Check system dir
     find_library(${result_var}
         NAMES ${libname})

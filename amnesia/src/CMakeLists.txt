@@ -21,7 +21,12 @@ add_definitions(
     -Wno-reorder
     -Wno-unused-variable
     -Wno-unused-function
+    -fpermissive
 )
+
+# Disable PIE for compatibility with static libraries
+set(CMAKE_POSITION_INDEPENDENT_CODE OFF)
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -no-pie")
 
 add_subdirectory(../../HPL2/core core2)
 
