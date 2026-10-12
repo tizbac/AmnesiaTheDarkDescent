@@ -81,7 +81,7 @@ bool cOpenXR::Init(cConfigFile* apConfig)
 	// Check if VR is enabled in config
 	if (apConfig)
 	{
-		mbEnabled = apConfig->GetBool("VR", "Enabled", false);
+		mbEnabled = apConfig->GetBool("VR", "Enabled", true);
 		mfIPD = apConfig->GetFloat("VR", "IPD", 0.064f);
 		mfNearZ = apConfig->GetFloat("VR", "NearZ", 0.1f);
 		mfFarZ = apConfig->GetFloat("VR", "FarZ", 1000.0f);

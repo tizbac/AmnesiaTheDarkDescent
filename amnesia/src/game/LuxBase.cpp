@@ -1171,7 +1171,7 @@ bool cLuxBase::InitEngine()
     
 	/////////////////////////
 	// Create the engine
-	mpEngine = CreateHPLEngine(eHplAPI_OpenGL, eHplSetup_All, &vars);
+	mpEngine = CreateHPLEngine(eHplAPI_OpenGL, eHplSetup_All, &vars, mpMainConfig);
 	
 	/////////////////////////
 	// Set up more properties

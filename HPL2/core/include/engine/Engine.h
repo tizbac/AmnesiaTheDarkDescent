@@ -29,6 +29,7 @@ namespace hpl {
 	class iLowLevelEngineSetup;
 	class iLowLevelSystem;
 	class cLogicTimer;
+	class cConfigFile;
 
 	class cSystem;
 	class cInput;
@@ -89,7 +90,7 @@ namespace hpl {
 
 	//---------------------------------------------------
 	    
-	extern cEngine* CreateHPLEngine(eHplAPI aApi, tFlag alHplModuleFlags, cEngineInitVars *apVars);
+	extern cEngine* CreateHPLEngine(eHplAPI aApi, tFlag alHplModuleFlags, cEngineInitVars *apVars, cConfigFile* apMainConfig);
 	extern void DestroyHPLEngine(cEngine* apGame);
 
 	//---------------------------------------------------
@@ -97,7 +98,7 @@ namespace hpl {
 	class cEngine
 	{
 	public:
-		cEngine(iLowLevelEngineSetup *apGameSetup,tFlag alHplSetupFlags, cEngineInitVars *apVars);
+		cEngine(iLowLevelEngineSetup *apGameSetup,tFlag alHplSetupFlags, cEngineInitVars *apVars, cConfigFile* apMainConfig);
 		~cEngine();
 	private:
 		void GameInit(iLowLevelEngineSetup *apGameSetup,tFlag alHplSetupFlags, cEngineInitVars *apVars);
@@ -187,6 +188,8 @@ namespace hpl {
 		void CheckIfAppInFocusElseWait();
 
 		void CheckAndBroadcastDeviceChange();
+
+		cConfigFile* mpMainConfig;
 
 		bool mbGameIsDone;
 

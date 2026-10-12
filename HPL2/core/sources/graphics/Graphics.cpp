@@ -131,7 +131,7 @@ namespace hpl {
 							int alMultisampling,eGpuProgramFormat aGpuProgramFormat,
 							const tString &asWindowCaption, const cVector2l &avWindowPos,
 							cResources* apResources,
-							tFlag alHplSetupFlags)
+							tFlag alHplSetupFlags, iLowLevelSystem* apLowLevelSystem, cConfigFile* apMainConfig)
 	{
 		Log("Initializing Graphics Module\n");
 		Log("--------------------------------------------------------\n");
@@ -152,12 +152,32 @@ namespace hpl {
 			mpLowLevelGraphics->Init(alWidth,alHeight,alDisplay,alBpp,abFullscreen,alMultisampling,aGpuProgramFormat,asWindowCaption,
 									avWindowPos);
 			mbScreenIsSetup = true;
+
+			// Store LowLevelSystem for OpenXR
+			mpLowLevelSystem = apLowLevelSystem;
 		}
 		else
 		{
 			mbScreenIsSetup = false;
 		}
-		
+
+#if defined(USE_OPENXR)
+		// Initialize OpenXR VR
+		if(alHplSetupFlags & eHplSetup_Screen)
+		{
+			Log("Initializing OpenXR VR...\n");
+			mpOpenXR = hplNew(cOpenXR, (mpLowLevelSystem, mpLowLevelGraphics));
+			if (mpOpenXR)
+			{
+				if (!mpOpenXR->Init(apMainConfig))
+				{
+					Error("OpenXR initialization failed, VR disabled\n");
+					hplDelete(mpOpenXR);
+					mpOpenXR = NULL;
+				}
+			}
+		}
+#endif
 
 		////////////////////////////////////////////////
 		// Create systems

@@ -179,6 +179,7 @@ namespace hpl {
 		int alMultisampling, eGpuProgramFormat aGpuProgramFormat,const tString& asWindowCaption,
 		const cVector2l &avWindowPos)
 	{
+        printf("DEBUG: LowLevelGraphicsSDL::Init called\n"); fflush(stdout);
 		mvScreenSize.x = alWidth;
 		mvScreenSize.y = alHeight;
         mlDisplay = alDisplay;

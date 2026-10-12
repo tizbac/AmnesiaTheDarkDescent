@@ -29,6 +29,7 @@ namespace hpl {
 
 	class cResources;
 	class iRenderer;
+	class iLowLevelSystem;
 	class cPostEffectsComposite;
 	class iPostEffectType;
 	class iPostEffectParams;
@@ -92,7 +93,7 @@ namespace hpl {
 
 		bool Init(int alWidth, int alHeight, int alDisplay, int alBpp, int abFullscreen, int alMultisampling,
 					eGpuProgramFormat aGpuProgramFormat,const tString &asWindowCaption, const cVector2l &avWindowPos,
-					cResources* apResources, tFlag alHplSetupFlags);
+					cResources* apResources, tFlag alHplSetupFlags, iLowLevelSystem* apLowLevelSystem, cConfigFile* apMainConfig);
 
 		void Update(float afTimeStep);
 
@@ -157,6 +158,7 @@ namespace hpl {
 	private:
 		iLowLevelGraphics *mpLowLevelGraphics;
 		iLowLevelResources *mpLowLevelResources;
+		iLowLevelSystem *mpLowLevelSystem;
 		cMeshCreator *mpMeshCreator;
 		cTextureCreator* mpTextureCreator;
 		cDecalCreator* mpDecalCreator;

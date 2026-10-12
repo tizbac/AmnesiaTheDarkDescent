@@ -161,7 +161,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 	
-	cEngine* CreateHPLEngine(eHplAPI aApi, tFlag alHplModuleFlags, cEngineInitVars *apVars)
+	cEngine* CreateHPLEngine(eHplAPI aApi, tFlag alHplModuleFlags, cEngineInitVars *apVars, cConfigFile* apMainConfig)
 	{
 		iLowLevelEngineSetup *pGameSetup = NULL;
 
@@ -170,7 +170,7 @@ namespace hpl {
 			case eHplAPI_OpenGL: pGameSetup = hplNew(cSDLEngineSetup, (alHplModuleFlags) ); break;
 		}
 
-		return hplNew( cEngine,  (pGameSetup,alHplModuleFlags, apVars) ); 
+		return hplNew( cEngine,  (pGameSetup,alHplModuleFlags, apVars, apMainConfig) ); 
 	}
 
 	//-----------------------------------------------------------------------
@@ -193,9 +193,10 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cEngine::cEngine(iLowLevelEngineSetup *apGameSetup,tFlag alHplSetupFlags, cEngineInitVars *apVars)
+	cEngine::cEngine(iLowLevelEngineSetup *apGameSetup,tFlag alHplSetupFlags, cEngineInitVars *apVars, cConfigFile* apMainConfig)
 	{
-		GameInit(apGameSetup,alHplSetupFlags, apVars);
+		mpMainConfig = apMainConfig;
+	GameInit(apGameSetup,alHplSetupFlags, apVars);
 
 		//Set up variables
 		mbWaitIfAppOutOfFocus = false;
@@ -280,7 +281,8 @@ namespace hpl {
 							apVars->mGraphics.mGpuProgramFormat,
 							apVars->mGraphics.msWindowCaption,
 							apVars->mGraphics.mvWindowPosition,
-							mpResources,alHplSetupFlags);
+							mpResources, alHplSetupFlags,
+							mpSystem->GetLowLevel(), mpMainConfig);
 		
 		//Init Sound
 		mpSound->Init(mpResources, apVars->mSound.mlSoundDeviceID,

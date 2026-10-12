@@ -1,0 +1,2 @@
+/usr/bin/ar qc libbinreloc.a CMakeFiles/binreloc.dir/home/tiziano/AmnesiaTheDarkDescent/HPL2/dependencies/sources/binreloc/binreloc.c.o
+/usr/bin/ranlib libbinreloc.a
