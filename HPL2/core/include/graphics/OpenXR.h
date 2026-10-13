@@ -28,6 +28,40 @@
 #include <openxr/openxr.h>
 #include <openxr/openxr_platform.h>
 
+#if defined(__linux__)
+#include <X11/Xlib.h>
+#include <GL/glx.h>
+#endif
+
+// XrSwapchainImageOpenGLKHR is defined in XR_KHR_opengl_enable extension
+// which may not be in the standard headers on all systems
+struct XrSwapchainImageOpenGLKHR
+{
+    XrStructureType    type;
+    void*              next;
+    uint32_t           image;
+};
+
+// XrGraphicsBindingOpenGLKHR is defined in XR_KHR_opengl_enable extension
+struct XrGraphicsBindingOpenGLKHR
+{
+    XrStructureType    type;
+    void*              next;
+#if defined(_WIN32)
+    HDC                hDC;
+    HGLRC              hGLRC;
+#elif defined(__linux__)
+    Display*           xDisplay;
+    GLXFBConfig        glxFBConfig;
+    GLXDrawable        glxDrawable;
+    GLXContext         glxContext;
+#endif
+};
+
+#ifndef XR_TYPE_GRAPHICS_BINDING_OPENGL_KHR
+#define XR_TYPE_GRAPHICS_BINDING_OPENGL_KHR 1000023004
+#endif
+
 namespace hpl {
 
 	class iLowLevelGraphics;
@@ -76,19 +110,20 @@ namespace hpl {
 		XrSpace mReferenceSpace = XR_NULL_HANDLE;
 		XrSpace mLocalSpace = XR_NULL_HANDLE;
 
-		// Swapchain for each eye
-		struct SwapchainData {
-			XrSwapchain swapchain = XR_NULL_HANDLE;
-			std::vector<XrSwapchainImageBaseHeader*> images;
-			int width = 0;
-			int height = 0;
-		};
-		SwapchainData mLeftSwapchain;
-		SwapchainData mRightSwapchain;
-
 		// View configuration
 		XrViewConfigurationType mViewConfigType = XR_VIEW_CONFIGURATION_TYPE_PRIMARY_STEREO;
 		std::vector<XrViewConfigurationView> mViewConfigViews;
+		std::vector<XrView> mViews;
+
+		// Swapchain for each eye
+		struct SwapchainData {
+			XrSwapchain swapchain = XR_NULL_HANDLE;
+			std::vector<XrSwapchainImageOpenGLKHR*> images;
+			uint32_t imageIndex = 0;
+			int width = 0;
+			int height = 0;
+		};
+		std::vector<SwapchainData> mSwapchains;
 
 		// Frame state
 		XrFrameState mFrameState = { XR_TYPE_FRAME_STATE };
@@ -96,9 +131,10 @@ namespace hpl {
 		XrFrameBeginInfo mFrameBeginInfo = { XR_TYPE_FRAME_BEGIN_INFO };
 		XrFrameEndInfo mFrameEndInfo = { XR_TYPE_FRAME_END_INFO };
 
-		// Views for rendering
+		// View locate info
 		XrViewLocateInfo mViewLocateInfo = { XR_TYPE_VIEW_LOCATE_INFO };
-		std::vector<XrView> mViews;
+
+		// Composition layer
 		std::vector<XrCompositionLayerProjectionView> mProjectionLayerViews;
 		XrCompositionLayerProjection mProjectionLayer = { XR_TYPE_COMPOSITION_LAYER_PROJECTION };
 
@@ -115,7 +151,7 @@ namespace hpl {
 		XrPath mLeftHandGripPath = XR_NULL_PATH;
 		XrPath mRightHandGripPath = XR_NULL_PATH;
 
-		// Space for hand poses
+		// Hand spaces
 		std::vector<XrSpace> mHandSpaces;
 
 		// Settings
@@ -124,7 +160,7 @@ namespace hpl {
 		bool mbSessionRunning = false;
 		bool mbInitialized = false;
 
-		float mfIPD = 0.064f; // Default interpupillary distance
+		float mfIPD = 0.064f;
 		float mfNearZ = 0.1f;
 		float mfFarZ = 1000.0f;
 
@@ -134,29 +170,16 @@ namespace hpl {
 		iLowLevelGraphics* mpLowLevelGraphics;
 
 		// Internal methods
-		bool CreateInstance();
-		bool GetSystem();
-		bool CreateSession();
-		bool CreateReferenceSpace();
-		bool CreateSwapchains();
-		bool CreateActions();
-		bool CreateSpaces();
-
-		void DestroySwapchains();
-		void DestroyActions();
-		void DestroySpaces();
-		void DestroySession();
-		void DestroyInstance();
-
 		bool BeginSession();
 		void EndSession();
 
-		void PollEvents();
-		void UpdateViewConfig();
-		void UpdateInput();
+		bool CreateSwapchains();
+		void DestroySwapchains();
 
 		void SetupProjectionLayerViews();
-		void SubmitFrame();
+		void UpdateViewConfig();
+
+		void PollEvents();
 
 		// Helper
 		static const char* XrResultToString(XrResult result);

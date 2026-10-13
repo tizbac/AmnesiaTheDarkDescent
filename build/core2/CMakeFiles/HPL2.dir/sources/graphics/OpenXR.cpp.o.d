@@ -154,6 +154,12 @@ core2/CMakeFiles/HPL2.dir/sources/graphics/OpenXR.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
  /usr/include/openxr/openxr_platform.h /usr/include/openxr/openxr.h \
+ /usr/include/X11/Xlib.h /usr/include/X11/X.h \
+ /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h \
+ /usr/include/GL/glx.h /usr/include/X11/Xutil.h /usr/include/X11/keysym.h \
+ /usr/include/X11/keysymdef.h /usr/include/GL/gl.h \
+ /usr/include/GL/glext.h /usr/include/KHR/khrplatform.h \
+ /usr/include/GL/glxext.h /usr/include/inttypes.h \
  /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/resources/ConfigFile.h \
  /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/graphics/GraphicsTypes.h \
  /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/graphics/Color.h \

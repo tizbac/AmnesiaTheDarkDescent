@@ -5014,6 +5014,18 @@ core2/CMakeFiles/HPL2.dir/sources/graphics/Graphics.cpp.o
  /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/system/SerializeClass.h
  /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/system/String.h
  /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/system/SystemTypes.h
+ /usr/include/GL/gl.h
+ /usr/include/GL/glext.h
+ /usr/include/GL/glx.h
+ /usr/include/GL/glxext.h
+ /usr/include/KHR/khrplatform.h
+ /usr/include/X11/X.h
+ /usr/include/X11/Xfuncproto.h
+ /usr/include/X11/Xlib.h
+ /usr/include/X11/Xosdefs.h
+ /usr/include/X11/Xutil.h
+ /usr/include/X11/keysym.h
+ /usr/include/X11/keysymdef.h
  /usr/include/alloca.h
  /usr/include/asm-generic/errno-base.h
  /usr/include/asm-generic/errno.h
@@ -5100,6 +5112,7 @@ core2/CMakeFiles/HPL2.dir/sources/graphics/Graphics.cpp.o
  /usr/include/errno.h
  /usr/include/features-time64.h
  /usr/include/features.h
+ /usr/include/inttypes.h
  /usr/include/linux/errno.h
  /usr/include/locale.h
  /usr/include/math.h
@@ -7259,6 +7272,18 @@ core2/CMakeFiles/HPL2.dir/sources/graphics/OpenXR.cpp.o
  /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/system/SerializeClass.h
  /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/system/String.h
  /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/system/SystemTypes.h
+ /usr/include/GL/gl.h
+ /usr/include/GL/glext.h
+ /usr/include/GL/glx.h
+ /usr/include/GL/glxext.h
+ /usr/include/KHR/khrplatform.h
+ /usr/include/X11/X.h
+ /usr/include/X11/Xfuncproto.h
+ /usr/include/X11/Xlib.h
+ /usr/include/X11/Xosdefs.h
+ /usr/include/X11/Xutil.h
+ /usr/include/X11/keysym.h
+ /usr/include/X11/keysymdef.h
  /usr/include/alloca.h
  /usr/include/asm-generic/errno-base.h
  /usr/include/asm-generic/errno.h
@@ -7346,6 +7371,7 @@ core2/CMakeFiles/HPL2.dir/sources/graphics/OpenXR.cpp.o
  /usr/include/errno.h
  /usr/include/features-time64.h
  /usr/include/features.h
+ /usr/include/inttypes.h
  /usr/include/linux/errno.h
  /usr/include/locale.h
  /usr/include/math.h

@@ -4987,6 +4987,18 @@ core2/CMakeFiles/HPL2.dir/sources/graphics/Graphics.cpp.o: /home/tiziano/Amnesia
   /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/system/SerializeClass.h \
   /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/system/String.h \
   /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/system/SystemTypes.h \
+  /usr/include/GL/gl.h \
+  /usr/include/GL/glext.h \
+  /usr/include/GL/glx.h \
+  /usr/include/GL/glxext.h \
+  /usr/include/KHR/khrplatform.h \
+  /usr/include/X11/X.h \
+  /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xlib.h \
+  /usr/include/X11/Xosdefs.h \
+  /usr/include/X11/Xutil.h \
+  /usr/include/X11/keysym.h \
+  /usr/include/X11/keysymdef.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
@@ -5073,6 +5085,7 @@ core2/CMakeFiles/HPL2.dir/sources/graphics/Graphics.cpp.o: /home/tiziano/Amnesia
   /usr/include/errno.h \
   /usr/include/features-time64.h \
   /usr/include/features.h \
+  /usr/include/inttypes.h \
   /usr/include/linux/errno.h \
   /usr/include/locale.h \
   /usr/include/math.h \
@@ -7221,6 +7234,18 @@ core2/CMakeFiles/HPL2.dir/sources/graphics/OpenXR.cpp.o: /home/tiziano/AmnesiaTh
   /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/system/SerializeClass.h \
   /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/system/String.h \
   /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/system/SystemTypes.h \
+  /usr/include/GL/gl.h \
+  /usr/include/GL/glext.h \
+  /usr/include/GL/glx.h \
+  /usr/include/GL/glxext.h \
+  /usr/include/KHR/khrplatform.h \
+  /usr/include/X11/X.h \
+  /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xlib.h \
+  /usr/include/X11/Xosdefs.h \
+  /usr/include/X11/Xutil.h \
+  /usr/include/X11/keysym.h \
+  /usr/include/X11/keysymdef.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
@@ -7308,6 +7333,7 @@ core2/CMakeFiles/HPL2.dir/sources/graphics/OpenXR.cpp.o: /home/tiziano/AmnesiaTh
   /usr/include/errno.h \
   /usr/include/features-time64.h \
   /usr/include/features.h \
+  /usr/include/inttypes.h \
   /usr/include/linux/errno.h \
   /usr/include/locale.h \
   /usr/include/math.h \
@@ -51721,8 +51747,6 @@ core2/CMakeFiles/HPL2.dir/sources/system/Thread.cpp.o: /home/tiziano/AmnesiaTheD
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/dependencies/OALWrapper/include/AL/efx.h:
 
-/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/sound/SoundEnvironment.h:
-
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/sound/LowLevelSound.h:
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/impl/LowLevelSoundOpenAL.h:
@@ -51847,25 +51871,7 @@ core2/CMakeFiles/HPL2.dir/sources/system/Thread.cpp.o: /home/tiziano/AmnesiaTheD
 
 /usr/lib/gcc/x86_64-linux-gnu/14/include/emmintrin.h:
 
-/usr/include/inttypes.h:
-
 /usr/include/iconv.h:
-
-/usr/include/X11/keysymdef.h:
-
-/usr/include/X11/keysym.h:
-
-/usr/include/X11/Xutil.h:
-
-/usr/include/X11/Xosdefs.h:
-
-/usr/include/X11/X.h:
-
-/usr/include/GL/glxext.h:
-
-/usr/include/GL/glx.h:
-
-/usr/include/GL/gl.h:
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/impl/FrameBufferGL.h:
 
@@ -51904,10 +51910,6 @@ core2/CMakeFiles/HPL2.dir/sources/system/Thread.cpp.o: /home/tiziano/AmnesiaTheD
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/sources/resources/WorldLoaderHandler.cpp:
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/dependencies/include/SDL2/SDL_events.h:
-
-/usr/include/X11/Xfuncproto.h:
-
-/home/tiziano/AmnesiaTheDarkDescent/HPL2/dependencies/include/SDL2/SDL_error.h:
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/dependencies/include/SDL2/SDL_endian.h:
 
@@ -51973,11 +51975,17 @@ core2/CMakeFiles/HPL2.dir/sources/system/Thread.cpp.o: /home/tiziano/AmnesiaTheD
 
 /usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
 
-/usr/include/x86_64-linux-gnu/bits/timex.h:
+/usr/include/linux/limits.h:
 
-/usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
+/usr/include/limits.h:
 
-/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/engine/LowLevelEngineSetup.h:
+/home/tiziano/AmnesiaTheDarkDescent/HPL2/dependencies/include/IL/il.h:
+
+/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/sources/impl/BitmapLoaderDevil.cpp:
+
+/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/haptic/HapticSurface.h:
+
+/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/haptic/HapticShape.h:
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/scene/RenderableContainer_List.h:
 
@@ -51986,6 +51994,18 @@ core2/CMakeFiles/HPL2.dir/sources/system/Thread.cpp.o: /home/tiziano/AmnesiaTheD
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/sources/impl/CharacterBodyNewton.cpp:
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/haptic/HapticForce.h:
+
+/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/sources/haptic/LowLevelHaptic.cpp:
+
+/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/haptic/LowLevelHaptic.h:
+
+/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/sources/haptic/Haptic.cpp:
+
+/usr/include/x86_64-linux-gnu/bits/timex.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
+
+/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/engine/LowLevelEngineSetup.h:
 
 /usr/include/x86_64-linux-gnu/bits/time.h:
 
@@ -52135,6 +52155,10 @@ core2/CMakeFiles/HPL2.dir/sources/system/Thread.cpp.o: /home/tiziano/AmnesiaTheD
 
 /usr/include/c++/14/streambuf:
 
+/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/sound/SoundEnvironment.h:
+
+/usr/include/KHR/khrplatform.h:
+
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/dependencies/include/SDL2/SDL_version.h:
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/ai/AStar.h:
@@ -52154,6 +52178,8 @@ core2/CMakeFiles/HPL2.dir/sources/system/Thread.cpp.o: /home/tiziano/AmnesiaTheD
 /usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/scene/SceneTypes.h:
+
+/usr/include/X11/Xutil.h:
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/gui/WidgetComboBox.h:
 
@@ -52419,6 +52445,8 @@ core2/CMakeFiles/HPL2.dir/sources/system/Thread.cpp.o: /home/tiziano/AmnesiaTheD
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/ai/AINodeContainer.h:
 
+/usr/include/GL/gl.h:
+
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/dependencies/OALWrapper/include/OALWrapper/OAL_Types.h:
 
 /usr/include/c++/14/bits/ios_base.h:
@@ -52435,9 +52463,7 @@ core2/CMakeFiles/HPL2.dir/sources/system/Thread.cpp.o: /home/tiziano/AmnesiaTheD
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/system/LowLevelSystem.h:
 
-/usr/include/X11/Xlib.h:
-
-/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/graphics/Color.h:
+/usr/include/GL/glx.h:
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/sources/resources/BitmapLoaderHandler.cpp:
 
@@ -52532,8 +52558,6 @@ core2/CMakeFiles/HPL2.dir/sources/system/Thread.cpp.o: /home/tiziano/AmnesiaTheD
 /usr/include/c++/14/bits/stl_construct.h:
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/sources/gui/GuiGfxElement.cpp:
-
-/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/sources/haptic/LowLevelHaptic.cpp:
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/scene/World.h:
 
@@ -52679,6 +52703,10 @@ core2/CMakeFiles/HPL2.dir/sources/system/Thread.cpp.o: /home/tiziano/AmnesiaTheD
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/physics/PhysicsWorld.h:
 
+/home/tiziano/AmnesiaTheDarkDescent/HPL2/dependencies/include/SDL2/SDL_error.h:
+
+/usr/include/X11/Xfuncproto.h:
+
 /usr/include/c++/14/ext/alloc_traits.h:
 
 /usr/include/c++/14/bits/uniform_int_dist.h:
@@ -52745,8 +52773,6 @@ core2/CMakeFiles/HPL2.dir/sources/system/Thread.cpp.o: /home/tiziano/AmnesiaTheD
 
 /usr/include/stdlib.h:
 
-/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/sources/impl/BitmapLoaderDevil.cpp:
-
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/impl/PhysicsBodyNewton.h:
 
 /usr/include/x86_64-linux-gnu/bits/statx-generic.h:
@@ -52762,6 +52788,8 @@ core2/CMakeFiles/HPL2.dir/sources/system/Thread.cpp.o: /home/tiziano/AmnesiaTheD
 /usr/include/GL/glu.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/14/include/stdint.h:
+
+/usr/include/GL/glxext.h:
 
 /usr/include/linux/posix_types.h:
 
@@ -52812,6 +52840,12 @@ core2/CMakeFiles/HPL2.dir/sources/system/Thread.cpp.o: /home/tiziano/AmnesiaTheD
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/dependencies/OALWrapper/include/AL/alext.h:
 
 /usr/include/x86_64-linux-gnu/sys/single_threaded.h:
+
+/usr/include/x86_64-linux-gnu/bits/local_lim.h:
+
+/usr/include/c++/14/bits/uses_allocator.h:
+
+/usr/lib/linux/uapi/x86/asm/bitsperlong.h:
 
 /usr/lib/linux/uapi/x86/asm/posix_types.h:
 
@@ -52965,6 +52999,12 @@ core2/CMakeFiles/HPL2.dir/sources/system/Thread.cpp.o: /home/tiziano/AmnesiaTheD
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/sound/MusicHandler.h:
 
+/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/impl/BitmapLoaderDevil.h:
+
+/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/graphics/Renderable.h:
+
+/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/sources/gui/WidgetListBox.cpp:
+
 /usr/include/x86_64-linux-gnu/bits/types/struct_statx_timestamp.h:
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/sound/SoundData.h:
@@ -52978,8 +53018,6 @@ core2/CMakeFiles/HPL2.dir/sources/system/Thread.cpp.o: /home/tiziano/AmnesiaTheD
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/impl/CharacterBodyNewton.h:
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/sound/SoundHandler.h:
-
-/usr/include/linux/limits.h:
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/sound/SoundTypes.h:
 
@@ -53076,6 +53114,8 @@ core2/CMakeFiles/HPL2.dir/sources/system/Thread.cpp.o: /home/tiziano/AmnesiaTheD
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/sources/graphics/BoneState.cpp:
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/graphics/BoneState.h:
+
+/usr/include/GL/glext.h:
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/gui/WidgetSlider.h:
 
@@ -53211,6 +53251,24 @@ core2/CMakeFiles/HPL2.dir/sources/system/Thread.cpp.o: /home/tiziano/AmnesiaTheD
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/graphics/TextureCreator.h:
 
+/usr/include/X11/X.h:
+
+/usr/include/x86_64-linux-gnu/bits/waitflags.h:
+
+/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/sources/gui/GuiPopUp.cpp:
+
+/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/graphics/Color.h:
+
+/usr/include/X11/Xlib.h:
+
+/usr/include/X11/Xosdefs.h:
+
+/usr/include/X11/keysym.h:
+
+/usr/include/X11/keysymdef.h:
+
+/usr/include/inttypes.h:
+
 /usr/include/c++/14/bits/stl_algobase.h:
 
 /usr/include/openxr/openxr.h:
@@ -53250,8 +53308,6 @@ core2/CMakeFiles/HPL2.dir/sources/system/Thread.cpp.o: /home/tiziano/AmnesiaTheD
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/engine/SaveGame.h:
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/sources/graphics/PostEffect_ImageTrail.cpp:
-
-/home/tiziano/AmnesiaTheDarkDescent/HPL2/dependencies/include/IL/il.h:
 
 /usr/include/assimp/defs.h:
 
@@ -53294,10 +53350,6 @@ core2/CMakeFiles/HPL2.dir/sources/system/Thread.cpp.o: /home/tiziano/AmnesiaTheD
 /usr/include/x86_64-linux-gnu/bits/locale.h:
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/gui/GuiSkin.h:
-
-/usr/include/x86_64-linux-gnu/bits/waitflags.h:
-
-/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/sources/gui/GuiPopUp.cpp:
 
 /usr/include/x86_64-linux-gnu/bits/uio_lim.h:
 
@@ -53380,25 +53432,3 @@ core2/CMakeFiles/HPL2.dir/sources/system/Thread.cpp.o: /home/tiziano/AmnesiaTheD
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/resources/ScriptManager.h:
 
 /home/tiziano/AmnesiaTheDarkDescent/HPL2/core/sources/gui/WidgetWindow.cpp:
-
-/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/sources/haptic/Haptic.cpp:
-
-/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/haptic/LowLevelHaptic.h:
-
-/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/haptic/HapticShape.h:
-
-/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/haptic/HapticSurface.h:
-
-/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/graphics/Renderable.h:
-
-/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/sources/gui/WidgetListBox.cpp:
-
-/home/tiziano/AmnesiaTheDarkDescent/HPL2/core/include/impl/BitmapLoaderDevil.h:
-
-/usr/include/limits.h:
-
-/usr/include/c++/14/bits/uses_allocator.h:
-
-/usr/lib/linux/uapi/x86/asm/bitsperlong.h:
-
-/usr/include/x86_64-linux-gnu/bits/local_lim.h:

@@ -109,7 +109,11 @@ cmake ../amnesia/src -DCMAKE_BUILD_TYPE=Release -DUSE_SDL2=ON -DUSE_OPENXR=ON
 - Controller input abstraction
 - Config file integration (`VR.Enabled`, `VR.IPD`, `VR.NearZ`, `VR.FarZ`)
 
-**Limitations**: Full stereo rendering pipeline and compositor integration not yet implemented. The current build links against `libopenxr_loader.so` and initializes the OpenXR runtime, but stereo rendering to the HMD is a work in progress.
+**⚠️ Critical Limitation**: The Monado OpenXR runtime (provided by `libopenxr1-monado` on Debian/Ubuntu) does **not** support the `XR_KHR_swapchain` extension, which is **required** for rendering to an HMD. The game initializes OpenXR successfully but cannot create swapchains for stereo rendering.
+
+**Workaround**: To enable VR rendering, you need an OpenXR runtime that supports `XR_KHR_swapchain` (e.g., SteamVR/OpenXR, Monado with swapchain support compiled in, or a proprietary runtime). The current Debian/Ubuntu `libopenxr1-monado` package lacks this extension.
+
+**Current behavior**: The game initializes OpenXR successfully (instance, system, views detected) but falls back to non-VR rendering when swapchain creation fails.
 
 **Dependencies**: `libopenxr-dev` (OpenXR 1.0 loader + headers)
 
